@@ -13,18 +13,17 @@ def test_geeksforgeeks_page_elements():
     driver.maximize_window()
     # Cargar la página
     driver.get("https://www.geeksforgeeks.org/software-testing/selenium-webdriver-submit-vs-click/")
-    time.sleep(5)  # Espera corta para asegurar carga
+    #time.sleep(5000)  # Espera corta para asegurar carga
 
-    driver.dialog.accept
+    #driver.dialog.accept
     try:
         WebDriverWait(driver, 5).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[text()='Consent']"))
+            EC.element_to_be_clickable((By.CLASS_NAME, "fc-button"))
         ).click()
         print("✅ Consentimiento de cookies cerrado.")
     except:
         print("ℹ️ No se encontró banner de cookies.")
 
-    time.sleep(5) 
     # Verificar que el título contenga 'Selenium WebDriver'
     assert "Selenium Webdriver submit() vs click() - GeeksforGeeks" in driver.title
 
@@ -65,6 +64,33 @@ def test_geeksforgeeks_page_elements():
 
     except Exception as e:
         print(f"❌ Test falló: {e}")
+
+
+    # Verificar el enlace de Linux
+    linux_menu_text = driver.find_element(By.LINK_TEXT, "Linux").text
+    print("El Texto de Linux: ",linux_menu_text)
+    try:        
+      WebDriverWait(driver, 5).until(
+      EC.element_to_be_clickable((By.LINK_TEXT, "Linux"))
+      ).click()
+      print("Link de Linux presionado")
+
+    except Exception as e:
+        print(f"❌ Link de Linux fallido: {e}")
+
+    print("✅ Test de link completado correctamente.")
+
+
+    # Esperar a la carga del enlace
+    try:        
+      WebDriverWait(driver, 15).until(
+      EC.text_to_be_present_in_element((By.XPATH, '//h1[text()="Linux/Unix Tutorial"]'),"Linux/Unix Tutorial"))
+
+    except Exception as e:
+        print(f"❌ Título de Linux fallido: {e}")
+
+    print("✅ Test de Link de Linux completado correctamente.")
+
 
 
     time.sleep(2)
