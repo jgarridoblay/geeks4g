@@ -86,6 +86,19 @@ def test_geeksforgeeks_page_elements():
       WebDriverWait(driver, 15).until(
       EC.text_to_be_present_in_element((By.XPATH, '//h1[text()="Linux/Unix Tutorial"]'),"Linux/Unix Tutorial"))
 
+      # Espera hasta que el <span> con texto "Installing Linux" sea visible
+      wait = WebDriverWait(driver, 10)
+      span_element = wait.until(EC.visibility_of_element_located((
+      By.XPATH, '//span[text()="Installing Linux"]'
+      )))
+      actions.move_to_element(span_element).perform()
+
+# Confirmación
+      if span_element.is_displayed():
+        print("El elemento <span>Installing Linux</span> está visible.")
+      else:
+        print("El elemento no está visible.")
+
     except Exception as e:
         print(f"❌ Título de Linux fallido: {e}")
 
