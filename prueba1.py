@@ -5,17 +5,65 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import matplotlib.pyplot as plt
+
 
 def test_geeksforgeeks_page_elements():
     # Inicializar el driver
     driver = webdriver.Chrome()
     #driver = webdriver.Firefox()
     driver.maximize_window()
-    # Cargar la página
-    driver.get("https://www.geeksforgeeks.org/software-testing/selenium-webdriver-submit-vs-click/")
-    #time.sleep(5000)  # Espera corta para asegurar carga
 
-    #driver.dialog.accept
+    url = "https://www.geeksforgeeks.org/software-testing/selenium-webdriver-submit-vs-click/"
+    # Cargar la página
+    driver.get(url)
+    #time.sleep(5000)  # Espera corta para asegurar carga
+    # Ejecutar JavaScript para obtener métricas de performance
+    timing = driver.execute_script("return window.performance.timing")
+
+    # Calcular métricas
+    navigation_start = timing["navigationStart"]
+    load_event_end = timing["loadEventEnd"]
+    dom_content_loaded = timing["domContentLoadedEventEnd"]
+    dom_interactive = timing["domInteractive"]
+
+    # Tiempo total de carga
+    load_time = load_event_end - navigation_start
+    dom_ready_time = dom_content_loaded - navigation_start
+
+
+    print(f"⏱ Tiempo total de carga: {load_time} ms")
+    print(f"🧱 Tiempo hasta DOM listo: {dom_ready_time} ms")
+    print(f"🧱 Tiempo hasta DOM interactivo: {dom_interactive - navigation_start} ms")
+
+
+        # Calcular métricas clave (en milisegundos)
+    navigation_start = timing["navigationStart"]
+    metrics = {
+        "Redirección": timing["redirectEnd"] - timing["redirectStart"],
+        "App cache": timing["domainLookupStart"] - timing["fetchStart"],
+        "DNS Lookup": timing["domainLookupEnd"] - timing["domainLookupStart"],
+        "Conexión": timing["connectEnd"] - timing["connectStart"],
+        "TTFB (primer byte)": timing["responseStart"] - timing["requestStart"],
+        "Contenido recibido": timing["responseEnd"] - timing["responseStart"],
+        "DOM Interactivo": timing["domInteractive"] - navigation_start,
+        "DOM Cargado": timing["domContentLoadedEventEnd"] - navigation_start,
+        "Carga completa": timing["loadEventEnd"] - navigation_start
+    }
+    
+    # Mostrar métricas en consola
+    for k, v in metrics.items():
+        print(f"{k}: {v} ms")
+    
+    # Crear gráfico
+    plt.figure(figsize=(10, 6))
+    plt.barh(list(metrics.keys()), list(metrics.values()), color='skyblue')
+    plt.xlabel("Tiempo (ms)")
+    plt.title(f"Métricas de rendimiento: {url}")
+    plt.tight_layout()
+    plt.show()
+
+
     try:
         WebDriverWait(driver, 5).until(
             EC.element_to_be_clickable((By.CLASS_NAME, "fc-button"))
