@@ -24,5 +24,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Instalar Google Chrome en macOS (si es necesario)
+        run: |
+        brew install --cask google-chrome || echo "Chrome ya instalado"
+      - name: Debug - Chrome version
+        run: google-chrome --version || echo "Chrome no encontrado"
+
+
       - name: Run Selenium tests
-        run: pytest tests/
+        run: pytest tests/ -v
