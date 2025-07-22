@@ -37,11 +37,11 @@ jobs:
       - name: Instalar Google Chrome en macOS (si es necesario)
         run: |
 
-     #     brew install --cask google-chrome || echo "Chrome ya instalado"
-     # - name: Debug - Chrome version
-     #   run: google-chrome --version || echo "Chrome no encontrado"
-#
-     # - name: Run tests with verbose and show all output
-     #   run: pytest tests/ -v --maxfail=5 --capture=no
-#
+          brew install --cask google-chrome || echo "Chrome ya instalado"
+      - name: Debug - Chrome version
+        run: google-chrome --version || echo "Chrome no encontrado"
+
+      - name: Run tests with verbose and show all output
+        run: pytest tests/ -v --maxfail=5 --capture=no
+
 
