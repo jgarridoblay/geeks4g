@@ -34,6 +34,7 @@ jobs:
 
 
 
-      - name: Run Selenium tests with verbose output
-        run: pytest -v --maxfail=1 --disable-warnings
+      - name: Run tests with verbose and show all output
+        run: pytest tests/ -v --maxfail=5 --capture=no
+
 
