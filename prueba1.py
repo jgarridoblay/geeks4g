@@ -6,11 +6,21 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import matplotlib.pyplot as plt
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 
 
 def test_geeksforgeeks_page_elements():
     # Inicializar el driver
-    driver = webdriver.Chrome()
+
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+    #driver = webdriver.Chrome()
     #driver = webdriver.Firefox()
     driver.maximize_window()
 
