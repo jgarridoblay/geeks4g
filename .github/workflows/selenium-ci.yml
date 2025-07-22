@@ -29,7 +29,11 @@ jobs:
           brew install --cask google-chrome || echo "Chrome ya instalado"
       - name: Debug - Chrome version
         run: google-chrome --version || echo "Chrome no encontrado"
+      - name: List files for debug
+        run: ls -lR
 
 
-      - name: Run Selenium tests
-        run: pytest tests/ -v
+
+      - name: Run Selenium tests with verbose output
+        run: pytest -v --maxfail=1 --disable-warnings
+
