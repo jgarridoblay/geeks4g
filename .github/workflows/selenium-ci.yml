@@ -1,6 +1,10 @@
 name: Run Selenium Tests on macOS
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   selenium-macos:
