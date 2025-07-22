@@ -48,30 +48,30 @@ def test_geeksforgeeks_page_elements():
 
 
         # Calcular métricas clave (en milisegundos)
-    navigation_start = timing["navigationStart"]
-    metrics = {
-        "Redirección": timing["redirectEnd"] - timing["redirectStart"],
-        "App cache": timing["domainLookupStart"] - timing["fetchStart"],
-        "DNS Lookup": timing["domainLookupEnd"] - timing["domainLookupStart"],
-        "Conexión": timing["connectEnd"] - timing["connectStart"],
-        "TTFB (primer byte)": timing["responseStart"] - timing["requestStart"],
-        "Contenido recibido": timing["responseEnd"] - timing["responseStart"],
-        "DOM Interactivo": timing["domInteractive"] - navigation_start,
-        "DOM Cargado": timing["domContentLoadedEventEnd"] - navigation_start,
-        "Carga completa": timing["loadEventEnd"] - navigation_start
-    }
-    
-    # Mostrar métricas en consola
-    for k, v in metrics.items():
-        print(f"{k}: {v} ms")
-    
-    # Crear gráfico
-    plt.figure(figsize=(10, 6))
-    plt.barh(list(metrics.keys()), list(metrics.values()), color='skyblue')
-    plt.xlabel("Tiempo (ms)")
-    plt.title(f"Métricas de rendimiento: {url}")
-    plt.tight_layout()
-    plt.show()
+    #navigation_start = timing["navigationStart"]
+    #metrics = {
+    #    "Redirección": timing["redirectEnd"] - timing["redirectStart"],
+    #    "App cache": timing["domainLookupStart"] - timing["fetchStart"],
+    #    "DNS Lookup": timing["domainLookupEnd"] - timing["domainLookupStart"],
+    #    "Conexión": timing["connectEnd"] - timing["connectStart"],
+    #    "TTFB (primer byte)": timing["responseStart"] - timing["requestStart"],
+    #    "Contenido recibido": timing["responseEnd"] - timing["responseStart"],
+    #    "DOM Interactivo": timing["domInteractive"] - navigation_start,
+    #    "DOM Cargado": timing["domContentLoadedEventEnd"] - navigation_start,
+    #    "Carga completa": timing["loadEventEnd"] - navigation_start
+    #}
+    #
+    ## Mostrar métricas en consola
+    #for k, v in metrics.items():
+    #    print(f"{k}: {v} ms")
+    #
+    ## Crear gráfico
+    #plt.figure(figsize=(10, 6))
+    #plt.barh(list(metrics.keys()), list(metrics.values()), color='skyblue')
+    #plt.xlabel("Tiempo (ms)")
+    #plt.title(f"Métricas de rendimiento: {url}")
+    #plt.tight_layout()
+    #plt.show()
 
 
     try:
