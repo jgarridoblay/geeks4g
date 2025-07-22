@@ -28,7 +28,7 @@ def test_geeksforgeeks_page_elements():
     url = "https://www.geeksforgeeks.org/software-testing/selenium-webdriver-submit-vs-click/"
     # Cargar la página
     driver.get(url)
-    #time.sleep(5000)  # Espera corta para asegurar carga
+    time.sleep(10)  # Espera corta para asegurar carga
     # Ejecutar JavaScript para obtener métricas de performance
     timing = driver.execute_script("return window.performance.timing")
 
