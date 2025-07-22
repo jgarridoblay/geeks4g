@@ -18,7 +18,7 @@ def test_geeksforgeeks_page_elements():
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    service = Service(ChromeDriverManager().install())
+    service = Service(ChromeDriverManager().install(timeout=30))
     driver = webdriver.Chrome(service=service, options=options)
     #driver = webdriver.Chrome()
     #driver = webdriver.Firefox()
